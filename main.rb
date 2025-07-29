@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
-require 'parser/current'
+require './lib/abc_evaluator'
 
 CODEPATH = 'samples/test1.rb'
-code = File.read(CODEPATH)
+
 puts '--- ▼ RAW CODE -----------------------------'
+code = File.read(CODEPATH)
 puts code
 
 puts '--- ▼ PARSE RESULT -------------------------'
-puts Parser::CurrentRuby.parse(code)
+expr = Parser::CurrentRuby.parse(code)
+puts expr
+
+puts '--- ▼ test -------------------------'
+AbcEvaluator.new.process(expr)
