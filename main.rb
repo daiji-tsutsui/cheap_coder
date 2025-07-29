@@ -13,4 +13,6 @@ expr = Parser::CurrentRuby.parse(code)
 puts expr
 
 puts '--- ▼ test -------------------------'
-AbcEvaluator.new.process(expr)
+evaluator = AbcEvaluator.new
+evaluator.process(expr)
+pp evaluator

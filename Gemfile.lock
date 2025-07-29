@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.3)
+    diff-lcs (1.6.2)
     json (2.13.2)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
@@ -33,6 +34,10 @@ GEM
     unicode-display_width (3.1.4)
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)
+    unparser (0.8.0)
+      diff-lcs (~> 1.6)
+      parser (>= 3.3.0)
+      prism (>= 1.4)
 
 PLATFORMS
   ruby
@@ -41,6 +46,7 @@ PLATFORMS
 DEPENDENCIES
   parser
   rubocop
+  unparser
 
 RUBY VERSION
    ruby 3.4.5p51
