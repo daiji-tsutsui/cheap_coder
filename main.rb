@@ -2,19 +2,10 @@
 
 require 'parser/current'
 
-code = <<~'CODE'
-  def main
-    test_print(name)
-  end
-
-  def name
-    'Adam'
-  end
-
-  def test_print(name)
-    puts "Hello, #{name}!!"
-  end
-CODE
+CODEPATH = 'samples/test1.rb'
+code = File.read(CODEPATH)
+puts '--- ▼ RAW CODE -----------------------------'
 puts code
 
+puts '--- ▼ PARSE RESULT -------------------------'
 puts Parser::CurrentRuby.parse(code)
