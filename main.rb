@@ -15,4 +15,4 @@ puts expr
 puts '--- ▼ test -------------------------'
 evaluator = AbcEvaluator.new
 evaluator.process(expr)
-puts evaluator.score_a
+puts evaluator.score

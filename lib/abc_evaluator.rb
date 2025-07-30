@@ -7,17 +7,20 @@ class AbcEvaluator
   include AST::Processor::Mixin
 
   def initialize
-    @detector_a = NodeDetector::Assignment.new
+    @detectors = {
+      A: NodeDetector::Assignment.new,
+      B: NodeDetector::Branch.new,
+    }
   end
 
-  def score_a
-    @detector_a.score
+  def score
+    @detectors.transform_values(&:score)
   end
 
   private
 
   def handler_missing(node)
-    @detector_a.check(node)
+    @detectors.each_value { |detector| detector.check(node) }
     node.children.each do |child|
       next unless child.is_a?(AST::Node)
 
