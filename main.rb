@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'dotenv/load'
-require './lib/abc_evaluator'
+require './lib/my_processor'
 
 CODEPATH = 'samples/test1.rb'
 
@@ -14,6 +14,6 @@ expr = Parser::CurrentRuby.parse(code)
 puts expr
 
 puts '--- ▼ test -------------------------'
-evaluator = AbcEvaluator.new
-evaluator.process(expr)
-puts evaluator.score
+processor = MyProcessor.new
+processor.process(expr)
+puts processor.score
