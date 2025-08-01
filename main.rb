@@ -14,6 +14,8 @@ expr = Parser::CurrentRuby.parse(code)
 puts expr
 
 puts '--- ▼ test -------------------------'
-processor = MyProcessor.new
+processor = MyProcessor.new(
+  evaluator: AbcEvaluator.new
+)
 processor.process(expr)
 puts processor.score
