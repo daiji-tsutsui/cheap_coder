@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-require './lib/abc_evaluator'
-
 class MyProcessor
   include AST::Processor::Mixin
 
   def initialize(**option)
     @evaluator = option[:evaluator]
+    @censor = option[:censor]
   end
 
   def score
@@ -19,6 +18,7 @@ class MyProcessor
 
   def handler_missing(node)
     @evaluator&.check(node)
+    @censor&.refine!(node)
     node.children.each do |child|
       next unless child.is_a?(AST::Node)
 
