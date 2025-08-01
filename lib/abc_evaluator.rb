@@ -10,6 +10,7 @@ class AbcEvaluator
     @detectors = {
       A: NodeDetector::Assignment.new,
       B: NodeDetector::Branch.new,
+      C: NodeDetector::Condition.new,
     }
   end
 
