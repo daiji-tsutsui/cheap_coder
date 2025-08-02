@@ -1,10 +1,17 @@
 # frozen_string_literal: true
 
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-ruby '~> 3.4.5'
+# Specify your gem's dependencies in cheap_coder.gemspec
+gemspec
+
+gem "irb"
+gem "rake", "~> 13.0"
+
+gem "rspec", "~> 3.0"
+
+gem "rubocop", "~> 1.21"
 
 gem 'dotenv'
 gem 'parser'
-gem 'rubocop'
 gem 'unparser'
