@@ -39,7 +39,7 @@ module CheapCoder
     end
 
     def print_debug(msg, node)
-      return unless ENV['DEBUG'] == 'true'
+      return unless ENV['CHEAP_CODER_LOGGER_VERBOSE'] == 'true'
 
       puts "[#{msg}] #{Unparser.unparse(node)}"
     end

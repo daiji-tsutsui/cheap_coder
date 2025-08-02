@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'cheap_coder'
+require 'dotenv/load'
 require 'parser/current'
 
 CODEPATH = 'samples/test2.rb'

@@ -17,7 +17,7 @@ module CheapCoder
       end
 
       def print_debug(node)
-        return unless ENV['DEBUG'] == 'true'
+        return unless ENV['CHEAP_CODER_LOGGER_VERBOSE'] == 'true'
 
         class_type = self.class.name.split('::').last
         puts "[#{class_type}] #{Unparser.unparse(node)}"
