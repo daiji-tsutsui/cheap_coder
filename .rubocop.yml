@@ -3,6 +3,10 @@ AllCops:
   TargetRubyVersion: 3.4
   SuggestExtensions: false
 
+Layout/LineLength:
+  Exclude:
+    - '*.gemspec'
+
 Style/Documentation:
   Enabled: false
 
