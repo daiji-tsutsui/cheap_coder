@@ -6,7 +6,7 @@ class Censor
   include AST::Processor::Mixin
 
   def initialize
-    @allowed_methods = %i(puts)
+    @allowed_methods = %i[puts]
   end
 
   def on_xstr(node)
