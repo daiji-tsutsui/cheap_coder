@@ -53,7 +53,7 @@ class Censor
   def send_allowed?(node)
     return false unless node.to_a[0].nil?
 
-    @authorizer.allow(node.to_a[1])
+    @authorizer.allow?(node.to_a[1])
   end
 
   def print_debug(msg, node)

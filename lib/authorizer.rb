@@ -9,7 +9,7 @@ class Authorizer
     @allowed_methods = %i(puts)
   end
 
-  def allow(method)
+  def allow?(method)
     @allowed_methods.include?(method)
   end
 
