@@ -6,6 +6,7 @@ require 'unparser'
 module CheapCoder
   require_relative 'cheap_coder/version'
   require_relative 'cheap_coder/abc_evaluator'
+  require_relative 'cheap_coder/authorizer'
   require_relative 'cheap_coder/censor'
 
   module NodeDetector

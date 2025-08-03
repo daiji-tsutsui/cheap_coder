@@ -5,12 +5,17 @@ module CheapCoder
     include AST::Processor::Mixin
 
     def initialize(**option)
-      @allowed_methods = %i[puts]
+      @authorizer = Authorizer.new
       @evaluator = option[:evaluator]
     end
 
     def score
       @evaluator.score
+    end
+
+    def process(expr)
+      @authorizer.process(expr)
+      super
     end
 
     def on_xstr(node)
@@ -26,6 +31,12 @@ module CheapCoder
     end
 
     def handler_missing(node)
+      default_handler(node)
+    end
+
+    private
+
+    def default_handler(node)
       @evaluator.check(node) if @evaluator
 
       type = node.type
@@ -37,12 +48,10 @@ module CheapCoder
       Parser::AST::Node.new(type, children)
     end
 
-    private
-
     def send_allowed?(node)
       return false unless node.to_a[0].nil?
 
-      @allowed_methods.include?(node.to_a[1])
+      @authorizer.allow?(node.to_a[1])
     end
 
     def print_debug(msg, node)

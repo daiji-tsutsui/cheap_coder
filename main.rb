@@ -4,7 +4,7 @@ require 'cheap_coder'
 require 'dotenv/load'
 require 'parser/current'
 
-CODEPATH = 'samples/test2.rb'
+CODEPATH = 'samples/test1.rb'
 
 puts '--- ▼ RAW CODE -----------------------------'
 code = File.read(CODEPATH)
