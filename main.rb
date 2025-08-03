@@ -5,7 +5,7 @@ require 'unparser'
 require './lib/abc_evaluator'
 require './lib/censor'
 
-CODEPATH = 'samples/test2.rb'
+CODEPATH = 'samples/test1.rb'
 
 puts '--- ▼ RAW CODE -----------------------------'
 code = File.read(CODEPATH)

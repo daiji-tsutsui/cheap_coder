@@ -1,17 +1,23 @@
 # frozen_string_literal: true
 
 require 'unparser'
+require_relative 'authorizer'
 
 class Censor
   include AST::Processor::Mixin
 
   def initialize(**option)
-    @allowed_methods = %i(puts)
+    @authorizer = Authorizer.new
     @evaluator = option[:evaluator]
   end
 
   def score
     @evaluator.score
+  end
+
+  def process(expr)
+    @authorizer.process(expr)
+    super
   end
 
   def on_xstr(node)
@@ -27,6 +33,12 @@ class Censor
   end
 
   def handler_missing(node)
+    default_handler(node)
+  end
+
+  private
+
+  def default_handler(node)
     @evaluator.check(node) if @evaluator
 
     type = node.type
@@ -38,12 +50,10 @@ class Censor
     Parser::AST::Node.new(type, children)
   end
 
-  private
-
   def send_allowed?(node)
     return false unless node.to_a[0].nil?
 
-    @allowed_methods.include?(node.to_a[1])
+    @authorizer.allow(node.to_a[1])
   end
 
   def print_debug(msg, node)
