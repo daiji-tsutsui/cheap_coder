@@ -10,7 +10,7 @@ module CheapCoder
     end
 
     def score
-      @evaluator.score
+      @evaluator&.score
     end
 
     def process(expr)
