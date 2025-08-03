@@ -4,8 +4,6 @@ require 'parser/current'
 require_relative 'node_detector'
 
 class AbcEvaluator
-  include AST::Processor::Mixin
-
   def initialize
     @detectors = {
       A: NodeDetector::Assignment.new,
@@ -17,17 +15,6 @@ class AbcEvaluator
   def score
     @detectors.transform_values(&:score)
   end
-
-  def handler_missing(node)
-    check(node)
-    node.children.each do |child|
-      next unless child.is_a?(AST::Node)
-
-      process(child)
-    end
-  end
-
-  private
 
   def check(node)
     @detectors.each_value do |detector|
