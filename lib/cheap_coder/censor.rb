@@ -4,8 +4,13 @@ module CheapCoder
   class Censor
     include AST::Processor::Mixin
 
-    def initialize
+    def initialize(**option)
       @allowed_methods = %i[puts]
+      @evaluator = option[:evaluator]
+    end
+
+    def score
+      @evaluator.score
     end
 
     def on_xstr(node)
@@ -21,6 +26,8 @@ module CheapCoder
     end
 
     def handler_missing(node)
+      @evaluator.check(node) if @evaluator
+
       type = node.type
       children = node.children.map do |child|
         next child unless child.is_a?(AST::Node)

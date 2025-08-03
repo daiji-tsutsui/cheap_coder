@@ -15,11 +15,11 @@ expr = Parser::CurrentRuby.parse(code)
 puts expr
 
 puts '--- ▼ CENSORED -----------------------------'
-censor = CheapCoder::Censor.new
+censor = CheapCoder::Censor.new(
+  evaluator: CheapCoder::AbcEvaluator.new
+)
 expr = censor.process(expr)
 puts Unparser.unparse(expr)
 
 puts '--- ▼ EVALUATE ABC SIZE --------------------'
-evaluator = CheapCoder::AbcEvaluator.new
-evaluator.process(expr)
-puts evaluator.score
+puts censor.score
