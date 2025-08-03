@@ -5,11 +5,16 @@ require 'unparser'
 class Authorizer
   include AST::Processor::Mixin
 
-  def initialize
-    @allowed_methods = %i(puts)
+  def initialize(allowed_methods)
+    @allowed_methods = allowed_methods || []
   end
 
-  def allow?(method)
+  def allow?(node)
+    raise ArgumentError, "not SEND node: #{node}" unless node.type == :send
+
+    receiver, method = node.to_a
+    return false unless receiver.nil?
+
     @allowed_methods.include?(method)
   end
 
@@ -26,7 +31,7 @@ class Authorizer
   private
 
   def default_handler(node)
-    children = node.children.map do |child|
+    node.children.each do |child|
       next child unless child.is_a?(AST::Node)
 
       process(child)
