@@ -15,7 +15,9 @@ expr = Parser::CurrentRuby.parse(code)
 puts expr
 
 puts '--- ▼ CENSORED -----------------------------'
+method_whitelist = %i[puts]
 censor = CheapCoder::Censor.new(
+  allowed_methods: method_whitelist,
   evaluator: CheapCoder::AbcEvaluator.new
 )
 expr = censor.process(expr)

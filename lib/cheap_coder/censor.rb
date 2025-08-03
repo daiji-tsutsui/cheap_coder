@@ -5,7 +5,7 @@ module CheapCoder
     include AST::Processor::Mixin
 
     def initialize(**option)
-      @authorizer = Authorizer.new
+      @authorizer = Authorizer.new(option[:allowed_methods])
       @evaluator = option[:evaluator]
     end
 
@@ -24,7 +24,7 @@ module CheapCoder
     end
 
     def on_send(node)
-      return node if send_allowed?(node)
+      return node if @authorizer.allow?(node)
 
       print_debug('!SEND', node)
       Parser::AST::Node.new(:nil, [])
@@ -37,7 +37,7 @@ module CheapCoder
     private
 
     def default_handler(node)
-      @evaluator.check(node) if @evaluator
+      @evaluator&.check(node)
 
       type = node.type
       children = node.children.map do |child|
@@ -46,12 +46,6 @@ module CheapCoder
         process(child)
       end
       Parser::AST::Node.new(type, children)
-    end
-
-    def send_allowed?(node)
-      return false unless node.to_a[0].nil?
-
-      @authorizer.allow?(node.to_a[1])
     end
 
     def print_debug(msg, node)
