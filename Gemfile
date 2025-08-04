@@ -12,6 +12,6 @@ gem 'rspec', '~> 3.0'
 
 gem 'rubocop', '~> 1.21'
 
-gem 'dotenv'
-gem 'parser'
-gem 'unparser'
+gem 'dotenv', '~> 3.1'
+gem 'parser', '~> 3.3'
+gem 'unparser', '~> 0.8'
